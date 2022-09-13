@@ -27,6 +27,7 @@ type Plugin struct {
 	AssumeRoleSessionName string
 	Bucket                string
 	UserRoleArn           string
+	ArtifactFile          string   // Artifact File location
 
 	// if not "", enable server-side encryption
 	// valid values are:
@@ -237,6 +238,14 @@ func (p *Plugin) Exec() error {
 
 			return err
 		}
+		
+		if p.ArtifactFile != "" {
+			content, err := ioutil.ReadFile(p.ArtifactFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "failed to read digest file contents at path: %s with error: %s\n", p.ArtifactFile, err)
+			}
+		}
+		
 		f.Close()
 	}
 
