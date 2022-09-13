@@ -170,6 +170,7 @@ func run(c *cli.Context) error {
 		StorageClass:          c.String("storage-class"),
 		PathStyle:             c.Bool("path-style"),
 		DryRun:                c.Bool("dry-run"),
+		ArtifactPath:	       c.Bool("artifact-file"),
 	}
 
 	return plugin.Exec()
